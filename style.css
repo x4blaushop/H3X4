@@ -1,0 +1,75 @@
+/* Reset para garantir silêncio e estabilidade no console */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.portal-container {
+    position: relative;
+    text-align: center;
+    z-index: 1;
+}
+
+/* Simulação da massa gravitacional vermelha ao fundo */
+.gravitational-mass {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(139, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 70%);
+    border-radius: 50%;
+    z-index: -1;
+    filter: blur(40px);
+    animation: pulse 4s infinite ease-in-out;
+}
+
+#main-image {
+    max-width: 350px;
+    border-radius: 10px;
+    box-shadow: 0 0 50px rgba(255, 0, 0, 0.2);
+    transition: transform 0.5s ease;
+}
+
+#main-image:hover {
+    transform: scale(1.02);
+}
+
+.access-panel {
+    margin-top: 20px;
+}
+
+button {
+    background: transparent;
+    color: #ff0000;
+    border: 1px solid #ff0000;
+    padding: 10px 25px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #ff0000;
+    color: #000;
+    box-shadow: 0 0 20px #ff0000;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+    50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.8; }
+}
