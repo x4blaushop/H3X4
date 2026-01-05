@@ -8,20 +8,20 @@
 </head>
 <body>
 
-    <div class="master-container">
-        <div class="vortex-bg"></div>
-        <img src="https://raw.githubusercontent.com/x4blaushop/H3X4/main/sua-imagem.jpg" alt="H3X4 Architect" class="main-image">
-        <div class="money-rain" id="moneyRain"></div>
-    </div>
-
-    <main class="ui-layer">
-        <h1 class="glitch">H3X4</h1>
-        <div class="biometric-scanner">
-            <div class="laser"></div>
-            <p id="statusText">AGUARDANDO DNA...</p>
+    <div class="main-container">
+        <div class="identity-core">
+            <img src="dna-identity.jpg" alt="Arquiteto H3X4" class="bg-image">
+            <div class="vortex-glow"></div>
         </div>
-        <button id="accessBtn" onclick="initDNA()">IDENTIFICAR ARQUITETO</button>
-    </main>
+
+        <div id="money-rain" class="money-overlay"></div>
+
+        <div class="interface-layer">
+            <h1 class="title">Sovereign Layer</h1>
+            <p class="status" id="status-text">Identificação Biométrica Requerida</p>
+            <button class="dna-button" id="auth-trigger">VERIFICAR DNA</button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
