@@ -1,25 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const btn = document.getElementById('activate-btn');
-    const status = document.getElementById('status');
-    const container = document.getElementById('money-flow');
+    const btn = document.getElementById('activate-portal');
+    const status = document.getElementById('biometric-status');
+    const portal = document.getElementById('money-portal');
 
-    function createMoney() {
-        for (let i = 0; i < 40; i++) {
+    function launchNotes() {
+        for (let i = 0; i < 35; i++) {
             setTimeout(() => {
-                const bill = document.createElement('div');
-                bill.className = 'falling-bill';
-                bill.style.left = Math.random() * 100 + 'vw';
-                bill.style.animationDuration = (Math.random() * 2 + 2) + 's';
-                container.appendChild(bill);
-                bill.addEventListener('animationend', () => bill.remove());
+                const note = document.createElement('div');
+                note.className = 'note';
+                note.style.left = Math.random() * 100 + 'vw';
+                note.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                portal.appendChild(note);
+                
+                // Limpeza para manter a aba Elements organizada
+                note.addEventListener('animationend', () => note.remove());
             }, i * 100);
         }
     }
 
     btn.addEventListener('click', () => {
-        status.innerText = "SISTEMA SOBERANO ATIVO";
+        status.innerText = "DNA RECONHECIDO: JOSÉ PATRICK";
         status.style.color = "#00ff00";
-        createMoney();
-        console.log("H3X4: Dono José Patrick identificado.");
+        launchNotes();
+        console.log("Portal H3X4: Assistência total concedida ao dono.");
     });
+
+    // Diagnóstico
+    console.log("1. Aba Elements: Organizada.");
+    console.log("2. Aba Network: Independente.");
+    console.log("3. Aba Console: Silêncio operacional.");
 });
