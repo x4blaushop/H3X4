@@ -1,59 +1,67 @@
-const canvas = document.getElementById('vortex-canvas');
-const ctx = canvas.getContext('2d');
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particles = [];
-
-class Particle {
-    constructor() {
-        this.reset();
-    }
-    reset() {
-        this.x = canvas.width / 2;
-        this.y = canvas.height / 2;
-        this.radius = Math.random() * canvas.width;
-        this.angle = Math.random() * Math.PI * 2;
-        this.velocity = Math.random() * 0.02 + 0.01; // Velocidade de rotação
-        this.color = 'rgba(255, 0, 0, ' + Math.random() + ')';
-    }
-    update() {
-        this.angle += this.velocity;
-        this.radius -= 2; // "Suga" para o centro
-        if (this.radius <= 0) this.reset();
-        
-        this.posX = canvas.width / 2 + Math.cos(this.angle) * this.radius;
-        this.posY = canvas.height / 2 + Math.sin(this.angle) * this.radius;
-    }
-    draw() {
-        ctx.fillStyle = this.color;
-        ctx.beginPath();
-        ctx.arc(this.posX, this.posY, 1.5, 0, Math.PI * 2);
-        ctx.fill();
-    }
-}
+const canvas = document.getElementById("portalCanvas");
+const ctx = canvas.getContext("2d");
+let w, h, particles = [];
+const dnaChars = "01X47H3X4".split(""); // DNA personalizado H3X4
 
 function init() {
-    for (let i = 0; i < 200; i++) particles.push(new Particle());
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+    particles = [];
+    
+    for(let i = 0; i < 1200; i++) { 
+        particles.push({
+            r: Math.random() * Math.max(w, h),
+            angle: Math.random() * Math.PI * 2,
+            speed: 0.004 + Math.random() * 0.003,
+            size: Math.random() * 10 + 5,
+            c: dnaChars[Math.floor(Math.random() * dnaChars.length)]
+        });
+    }
 }
 
-function animate() {
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'; // Cria o rastro de movimento
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+function draw() {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.2)"; // Rastro de movimento
+    ctx.fillRect(0, 0, w, h);
+    
     particles.forEach(p => {
-        p.update();
-        p.draw();
+        p.angle += p.speed;
+        p.r -= 3; // Velocidade de sucção para o centro
+        
+        if(p.r < 30) {
+            p.r = Math.max(w, h) * 0.9;
+        }
+
+        const x = w / 2 + Math.cos(p.angle) * p.r;
+        const y = h / 2 + Math.sin(p.angle) * p.r;
+
+        ctx.fillStyle = "#ff0000"; // Vermelho H3X4
+        ctx.font = p.size + "px monospace";
+        ctx.fillText(p.c, x, y);
     });
-    requestAnimationFrame(animate);
+
+    requestAnimationFrame(draw);
 }
 
-init();
-animate();
+// Chuva de Notas
+function createMoney() {
+    for (let i = 0; i < 40; i++) {
+        setTimeout(() => {
+            const note = document.createElement('div');
+            note.className = 'money-note';
+            note.style.left = Math.random() * 100 + 'vw';
+            note.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            document.body.appendChild(note);
+            note.addEventListener('animationend', () => note.remove());
+        }, i * 100);
+    }
+}
 
-// Botão de Identificação
-document.getElementById('activate-portal').addEventListener('click', () => {
-    document.getElementById('biometric-status').innerText = "BEM-VINDO JOSÉ PATRICK";
+document.getElementById('activate-btn').addEventListener('click', () => {
+    document.getElementById('biometric-status').innerText = "DNA IDENTIFICADO: JOSÉ PATRICK";
     document.getElementById('biometric-status').style.color = "#00ff00";
-    console.log("H3X4: Dono identificado.");
+    createMoney();
 });
+
+window.addEventListener("resize", init);
+init();
+draw();
