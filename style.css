@@ -2,16 +2,16 @@
 
 body, html {
     background: #000;
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
     overflow: hidden;
     font-family: 'Courier New', monospace;
 }
 
 .h3x4-container {
     position: relative;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,28 +22,34 @@ body, html {
     width: 100%;
     height: 100%;
     z-index: 1;
+    background: #000;
 }
 
 .bg-dna {
+    position: absolute;
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Garante que a imagem inteira apareça no celular */
-    filter: brightness(0.7) contrast(1.2);
+    object-fit: contain; /* Mantém a imagem inteira no celular */
+    z-index: 2;
+    filter: brightness(0.6) contrast(1.1);
 }
 
-.vortex-overlay {
+#vortex-canvas {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle, rgba(255, 0, 0, 0.25) 0%, transparent 70%);
-    animation: gravityPulse 4s infinite ease-in-out;
+    z-index: 3; /* Partículas ficam na frente da imagem, mas atrás da UI */
+    opacity: 0.6;
 }
 
-@keyframes gravityPulse {
-    0%, 100% { opacity: 0.4; transform: scale(1); }
-    50% { opacity: 0.8; transform: scale(1.1); }
+.red-glow-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+    background: radial-gradient(circle, rgba(139, 0, 0, 0.2) 0%, transparent 80%);
 }
 
 .access-ui {
@@ -51,7 +57,7 @@ body, html {
     z-index: 10;
     text-align: center;
     background: rgba(0, 0, 0, 0.7);
-    padding: 25px;
+    padding: 30px;
     border: 1px solid #ff0000;
     box-shadow: 0 0 20px #8b0000;
 }
@@ -62,23 +68,23 @@ body, html {
     background: transparent;
     border: 1px solid #ff0000;
     color: #ff0000;
-    padding: 10px 30px;
+    padding: 12px 30px;
     margin-top: 15px;
     cursor: pointer;
     font-weight: bold;
-    transition: 0.3s;
+    text-transform: uppercase;
 }
 
 #activate-portal:hover { background: #ff0000; color: #000; box-shadow: 0 0 20px #ff0000; }
 
-/* Estilo das Notas de Dinheiro */
+/* Notas de Dinheiro */
 .note {
     position: absolute;
-    width: 45px;
+    width: 40px;
     height: 20px;
     background: #2d5a27;
     border: 1px solid #4a9c42;
-    z-index: 5;
+    z-index: 15;
     animation: fallRain linear forwards;
 }
 
