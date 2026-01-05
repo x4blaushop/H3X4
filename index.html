@@ -3,20 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>H3X4 | Portal Soberano</title>
+    <title>H3X4 | Sovereign Layer</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="background-container">
-        <img src="portal-image.jpg" alt="H3X4 Portal" class="full-background-image">
-        <div class="overlay"></div> </div>
+    <div class="master-container">
+        <div class="vortex-bg"></div>
+        <img src="https://raw.githubusercontent.com/x4blaushop/H3X4/main/sua-imagem.jpg" alt="H3X4 Architect" class="main-image">
+        <div class="money-rain" id="moneyRain"></div>
+    </div>
 
-    <div id="money-notes-container"></div> <main class="portal-interface">
-        <h1 class="portal-title">SOVEREIGN LAYER</h1>
-        <p class="biometric-status" id="biometricStatus">Identificação Biométrica Requerida</p>
-        
-        <button id="accessButton" class="access-btn">VERIFICAR DNA</button>
+    <main class="ui-layer">
+        <h1 class="glitch">H3X4</h1>
+        <div class="biometric-scanner">
+            <div class="laser"></div>
+            <p id="statusText">AGUARDANDO DNA...</p>
+        </div>
+        <button id="accessBtn" onclick="initDNA()">IDENTIFICAR ARQUITETO</button>
     </main>
 
     <script src="script.js"></script>
