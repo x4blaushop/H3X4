@@ -5,44 +5,42 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let particles = [];
-const particleCount = 150;
 
 class Particle {
     constructor() {
         this.reset();
     }
     reset() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 1;
-        this.speed = Math.random() * 0.5 + 0.2;
+        this.x = canvas.width / 2;
+        this.y = canvas.height / 2;
+        this.radius = Math.random() * canvas.width;
         this.angle = Math.random() * Math.PI * 2;
-        this.spin = Math.random() * 0.02 + 0.01;
-        this.distance = Math.random() * canvas.width / 2;
+        this.velocity = Math.random() * 0.02 + 0.01; // Velocidade de rotação
+        this.color = 'rgba(255, 0, 0, ' + Math.random() + ')';
     }
     update() {
-        this.angle += this.spin;
-        this.x = canvas.width / 2 + Math.cos(this.angle) * this.distance;
-        this.y = canvas.height / 2 + Math.sin(this.angle) * this.distance;
-        if (this.distance > 0) this.distance -= this.speed;
-        else this.reset();
+        this.angle += this.velocity;
+        this.radius -= 2; // "Suga" para o centro
+        if (this.radius <= 0) this.reset();
+        
+        this.posX = canvas.width / 2 + Math.cos(this.angle) * this.radius;
+        this.posY = canvas.height / 2 + Math.sin(this.angle) * this.radius;
     }
     draw() {
-        ctx.fillStyle = 'rgba(255, 0, 0, 0.8)';
+        ctx.fillStyle = this.color;
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.arc(this.posX, this.posY, 1.5, 0, Math.PI * 2);
         ctx.fill();
     }
 }
 
 function init() {
-    for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle());
-    }
+    for (let i = 0; i < 200; i++) particles.push(new Particle());
 }
 
 function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'; // Cria o rastro de movimento
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
     particles.forEach(p => {
         p.update();
         p.draw();
@@ -53,24 +51,9 @@ function animate() {
 init();
 animate();
 
-// Lógica do Botão e Chuva de Dinheiro
-const btn = document.getElementById('activate-portal');
-const statusText = document.getElementById('biometric-status');
-const moneyPortal = document.getElementById('money-portal');
-
-btn.addEventListener('click', () => {
-    statusText.innerText = "DNA IDENTIFICADO: JOSÉ PATRICK";
-    statusText.style.color = "#00ff00";
-    
-    for (let i = 0; i < 40; i++) {
-        setTimeout(() => {
-            const note = document.createElement('div');
-            note.className = 'note';
-            note.style.left = Math.random() * 100 + 'vw';
-            note.style.animationDuration = (Math.random() * 2 + 2) + 's';
-            moneyPortal.appendChild(note);
-            note.addEventListener('animationend', () => note.remove());
-        }, i * 100);
-    }
-    console.log("Acesso total concedido ao Arquiteto.");
+// Botão de Identificação
+document.getElementById('activate-portal').addEventListener('click', () => {
+    document.getElementById('biometric-status').innerText = "BEM-VINDO JOSÉ PATRICK";
+    document.getElementById('biometric-status').style.color = "#00ff00";
+    console.log("H3X4: Dono identificado.");
 });
