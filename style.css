@@ -1,90 +1,88 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-body {
-    background-color: #000;
-    height: 100vh;
+body, html {
+    background: #000;
+    height: 100%;
+    width: 100%;
     overflow: hidden;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Courier New', monospace;
 }
 
-.master-portal {
+.h3x4-container {
     position: relative;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.identity-layer {
+.background-system {
     position: absolute;
     width: 100%;
     height: 100%;
     z-index: 1;
 }
 
-.main-dna-image {
+.bg-dna {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Faz a imagem preencher o fundo do celular */
-    filter: contrast(1.2) brightness(0.8);
+    object-fit: contain; /* Garante que a imagem inteira apareça no celular */
+    filter: brightness(0.7) contrast(1.2);
 }
 
-.vortex-red {
+.vortex-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle, rgba(139, 0, 0, 0.4) 0%, transparent 75%);
-    animation: pulseDNA 3s infinite ease-in-out;
+    background: radial-gradient(circle, rgba(255, 0, 0, 0.25) 0%, transparent 70%);
+    animation: gravityPulse 4s infinite ease-in-out;
 }
 
-@keyframes pulseDNA {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 0.7; }
+@keyframes gravityPulse {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.1); }
 }
 
-.ui-panel {
+.access-ui {
     position: relative;
     z-index: 10;
     text-align: center;
-    color: #fff;
-    background: rgba(0, 0, 0, 0.6);
-    padding: 30px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 25px;
     border: 1px solid #ff0000;
-    border-radius: 5px;
-    backdrop-filter: blur(8px);
+    box-shadow: 0 0 20px #8b0000;
 }
 
-.glitch-text { font-size: 3rem; color: #ff0000; text-shadow: 0 0 10px #ff0000; letter-spacing: 8px; }
+.glitch-title { color: #ff0000; font-size: 2.5rem; letter-spacing: 10px; text-shadow: 2px 2px #000; }
 
-#activate-btn {
-    margin-top: 20px;
+#activate-portal {
     background: transparent;
     border: 1px solid #ff0000;
     color: #ff0000;
-    padding: 12px 30px;
+    padding: 10px 30px;
+    margin-top: 15px;
     cursor: pointer;
     font-weight: bold;
-    text-transform: uppercase;
-    transition: 0.4s;
+    transition: 0.3s;
 }
 
-#activate-btn:hover { background: #ff0000; color: #000; box-shadow: 0 0 20px #ff0000; }
+#activate-portal:hover { background: #ff0000; color: #000; box-shadow: 0 0 20px #ff0000; }
 
 /* Estilo das Notas de Dinheiro */
-.falling-bill {
+.note {
     position: absolute;
-    width: 50px;
-    height: 25px;
-    background: #1b3d1b;
-    border: 1px solid #3e7a3e;
+    width: 45px;
+    height: 20px;
+    background: #2d5a27;
+    border: 1px solid #4a9c42;
     z-index: 5;
-    animation: rain linear infinite;
+    animation: fallRain linear forwards;
 }
 
-@keyframes rain {
+@keyframes fallRain {
     0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
     10% { opacity: 1; }
     100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
