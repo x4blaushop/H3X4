@@ -2,25 +2,22 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>H3X4 | Sovereign Layer</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <canvas id="portalCanvas"></canvas>
 
-    <div class="h3x4-container">
-        <canvas id="vortex-canvas"></canvas>
+    <main class="master-container">
+        <img src="dna_indentity.jpg" alt="Architect" class="architect-img">
 
-        <div class="identity-layer">
-            <img src="dna_indentity.jpg" alt="Architect" class="bg-dna">
+        <div class="ui-overlay">
+            <h1 class="glitch">H3X4</h1>
+            <p id="biometric-status">DNA REQUERIDO PARA ACESSO</p>
+            <button id="activate-btn">IDENTIFICAR DONO</button>
         </div>
-
-        <main class="access-ui">
-            <h1 class="glitch-title">H3X4</h1>
-            <p id="biometric-status">DNA REQUERIDO</p>
-            <button id="activate-portal">VERIFICAR DNA</button>
-        </main>
-    </div>
+    </main>
 
     <script src="scrip.js"></script>
 </body>
