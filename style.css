@@ -1,145 +1,117 @@
-:root {
-    --primary-red: #cc0000;
-    --dark-red: #8b0000;
-    --text-color: #ffffff;
-    --button-bg: transparent;
-    --button-border: #ff0000;
-    --button-text: #ff0000;
-    --button-hover-bg: #ff0000;
-    --button-hover-text: #000000;
-    --shadow-color: rgba(255, 0, 0, 0.5);
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-    font-family: 'Roboto Mono', monospace; /* Fonte mais "hacker" */
+    background-color: #000;
     height: 100vh;
-    overflow: hidden; /* Importante para o fundo */
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #000; /* Fundo padrão, caso a imagem demore a carregar */
-    color: var(--text-color);
+    font-family: 'Courier New', Courier, monospace;
 }
 
-/* O Contêiner que segura a imagem completa como fundo */
-.background-container {
+.master-container {
     position: absolute;
     width: 100%;
     height: 100%;
-    overflow: hidden;
-    z-index: -2; /* Fica bem atrás de tudo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
 }
 
-.full-background-image {
+/* O Buraco Negro Pulsante */
+.vortex-bg {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 70%);
+    border-radius: 50%;
+    filter: blur(60px);
+    animation: pulse 4s infinite ease-in-out;
+}
+
+.main-image {
+    position: relative;
+    max-height: 90vh;
+    z-index: 2;
+    filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.5));
+}
+
+/* Chuva de Notas */
+.money-rain {
+    position: absolute;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Garante que a imagem preencha o fundo */
-    object-position: center;
-    filter: brightness(0.7) contrast(1.2); /* Deixa a imagem um pouco mais escura e vibrante */
-    animation: backgroundPulse 10s infinite ease-in-out; /* Pulsar suavemente */
+    pointer-events: none;
+    z-index: 3;
 }
 
-.overlay {
+.bill {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4); /* Leve escurecimento para o texto aparecer melhor */
-    z-index: -1;
+    width: 40px;
+    height: 20px;
+    background: #2d5a27; /* Cor de nota de dinheiro */
+    border: 1px solid #4a9c42;
+    opacity: 0.6;
+    animation: falling linear infinite;
 }
 
-/* Animação de pulsação para o fundo, sutil como um vórtice */
-@keyframes backgroundPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.02); }
+@keyframes falling {
+    0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.7; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
 }
 
-/* Estilos para as notas de dinheiro caindo */
-#money-notes-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none; /* Garante que as notas não atrapalhem cliques */
-    z-index: -1; /* Atrás da interface, mas acima do fundo principal */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.3; }
+    50% { transform: scale(1.2); opacity: 0.6; }
 }
 
-.money-note {
-    position: absolute;
-    width: 50px; /* Tamanho das notas */
-    height: 25px;
-    background-image: url('note-template.png'); /* Imagem da nota, será gerada pelo JS */
-    background-size: contain;
-    background-repeat: no-repeat;
-    opacity: 0;
-    transform: translateY(-100px) rotateZ(0deg);
-    animation: fall linear infinite;
-}
-
-@keyframes fall {
-    0% {
-        opacity: 0;
-        transform: translateY(-10%) rotateZ(0deg) translateX(0);
-    }
-    10% {
-        opacity: 0.8;
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(110%) rotateZ(360deg) translateX(50px);
-    }
-}
-
-/* Interface do Portal */
-.portal-interface {
-    text-align: center;
-    padding: 30px;
-    background: rgba(0, 0, 0, 0.6); /* Fundo semi-transparente para a interface */
-    border-radius: 10px;
-    box-shadow: 0 0 50px rgba(255, 0, 0, 0.3);
-    backdrop-filter: blur(5px); /* Efeito de vidro embaçado */
+/* Camada UI */
+.ui-layer {
+    position: relative;
     z-index: 10;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid #ff0000;
+    backdrop-filter: blur(10px);
 }
 
-.portal-title {
-    font-size: 2.5em;
-    color: var(--button-text);
-    text-shadow: 0 0 15px var(--button-text);
-    margin-bottom: 10px;
-    letter-spacing: 5px;
+.glitch { color: #ff0000; font-size: 3rem; text-shadow: 2px 2px #fff; letter-spacing: 10px; }
+
+.biometric-scanner {
+    margin: 20px 0;
+    height: 40px;
+    border: 1px solid #ff0000;
+    position: relative;
+    overflow: hidden;
 }
 
-.biometric-status {
-    font-size: 1.1em;
-    color: var(--text-color);
-    margin-bottom: 30px;
+.laser {
+    width: 100%;
+    height: 2px;
+    background: #ff0000;
+    position: absolute;
+    box-shadow: 0 0 10px #ff0000;
+    animation: scan 2s infinite ease-in-out;
 }
 
-.access-btn {
-    background: var(--button-bg);
-    border: 2px solid var(--button-border);
-    color: var(--button-text);
-    padding: 15px 40px;
-    font-size: 1.2em;
-    font-weight: bold;
+@keyframes scan {
+    0%, 100% { top: 0; }
+    50% { top: 100%; }
+}
+
+button {
+    background: transparent;
+    border: 1px solid #ff0000;
+    color: #ff0000;
+    padding: 10px 20px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    box-shadow: 0 0 10px var(--button-border);
+    font-weight: bold;
+    transition: 0.3s;
 }
 
-.access-btn:hover {
-    background: var(--button-hover-bg);
-    color: var(--button-hover-text);
-    box-shadow: 0 0 30px var(--button-hover-bg);
-    transform: scale(1.05);
-}
+button:hover { background: #ff0000; color: #000; box-shadow: 0 0 20px #ff0000; }
