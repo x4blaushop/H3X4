@@ -5,12 +5,9 @@ body {
     height: 100vh;
     overflow: hidden;
     font-family: 'Courier New', Courier, monospace;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
-.main-container {
+.master-portal {
     position: relative;
     width: 100%;
     height: 100%;
@@ -19,74 +16,76 @@ body {
     align-items: center;
 }
 
-.identity-core {
+.identity-layer {
     position: absolute;
     width: 100%;
     height: 100%;
     z-index: 1;
 }
 
-.bg-image {
+.main-dna-image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    filter: brightness(0.6) contrast(1.1);
+    object-fit: cover; /* Faz a imagem preencher o fundo do celular */
+    filter: contrast(1.2) brightness(0.8);
 }
 
-.vortex-glow {
+.vortex-red {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle, rgba(139, 0, 0, 0.4) 0%, transparent 70%);
-    animation: pulse 4s infinite ease-in-out;
+    background: radial-gradient(circle, rgba(139, 0, 0, 0.4) 0%, transparent 75%);
+    animation: pulseDNA 3s infinite ease-in-out;
 }
 
-@keyframes pulse {
-    0%, 100% { opacity: 0.3; transform: scale(1); }
-    50% { opacity: 0.6; transform: scale(1.05); }
+@keyframes pulseDNA {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.7; }
 }
 
-.interface-layer {
+.ui-panel {
     position: relative;
     z-index: 10;
     text-align: center;
     color: #fff;
-    background: rgba(0,0,0,0.5);
-    padding: 20px;
-    border-radius: 10px;
-    backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.6);
+    padding: 30px;
+    border: 1px solid #ff0000;
+    border-radius: 5px;
+    backdrop-filter: blur(8px);
 }
 
-.title { font-size: 2.5rem; letter-spacing: 5px; text-shadow: 0 0 15px #ff0000; }
+.glitch-text { font-size: 3rem; color: #ff0000; text-shadow: 0 0 10px #ff0000; letter-spacing: 8px; }
 
-.dna-button {
+#activate-btn {
+    margin-top: 20px;
     background: transparent;
     border: 1px solid #ff0000;
     color: #ff0000;
-    padding: 15px 40px;
-    margin-top: 20px;
+    padding: 12px 30px;
     cursor: pointer;
     font-weight: bold;
+    text-transform: uppercase;
     transition: 0.4s;
 }
 
-.dna-button:hover { background: #ff0000; color: #000; box-shadow: 0 0 30px #ff0000; }
+#activate-btn:hover { background: #ff0000; color: #000; box-shadow: 0 0 20px #ff0000; }
 
-.money-overlay { position: absolute; width: 100%; height: 100%; z-index: 5; pointer-events: none; }
-
-.bill {
+/* Estilo das Notas de Dinheiro */
+.falling-bill {
     position: absolute;
-    width: 40px;
-    height: 20px;
+    width: 50px;
+    height: 25px;
     background: #1b3d1b;
-    border: 1px solid #2e5c2e;
-    animation: fall linear infinite;
+    border: 1px solid #3e7a3e;
+    z-index: 5;
+    animation: rain linear infinite;
 }
 
-@keyframes fall {
+@keyframes rain {
     0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
     10% { opacity: 1; }
-    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
 }
