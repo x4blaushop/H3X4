@@ -1,25 +1,25 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const authBtn = document.getElementById('auth-trigger');
-    const statusText = document.getElementById('status-text');
-    const rainContainer = document.getElementById('money-rain');
+    const btn = document.getElementById('activate-btn');
+    const status = document.getElementById('status');
+    const container = document.getElementById('money-flow');
 
-    function createRain() {
-        for (let i = 0; i < 30; i++) {
+    function createMoney() {
+        for (let i = 0; i < 40; i++) {
             setTimeout(() => {
                 const bill = document.createElement('div');
-                bill.classList.add('bill');
+                bill.className = 'falling-bill';
                 bill.style.left = Math.random() * 100 + 'vw';
-                bill.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                rainContainer.appendChild(bill);
+                bill.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                container.appendChild(bill);
                 bill.addEventListener('animationend', () => bill.remove());
-            }, i * 150);
+            }, i * 100);
         }
     }
 
-    authBtn.addEventListener('click', () => {
-        statusText.innerText = "DNA RECONHECIDO: JOSÉ PATRICK";
-        statusText.style.color = "#00ff00";
-        createRain();
-        console.log("H3X4: Acesso soberano confirmado.");
+    btn.addEventListener('click', () => {
+        status.innerText = "SISTEMA SOBERANO ATIVO";
+        status.style.color = "#00ff00";
+        createMoney();
+        console.log("H3X4: Dono José Patrick identificado.");
     });
 });
