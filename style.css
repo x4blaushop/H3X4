@@ -12,7 +12,6 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Courier New', monospace;
 }
 
 #portalCanvas {
@@ -21,82 +20,75 @@ body, html {
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 1; /* O vórtice fica no fundo */
+    z-index: 1;
 }
 
-.master-container {
-    position: relative;
-    z-index: 10;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
+.architect-wrapper {
+    position: absolute;
     width: 100%;
-}
-
-.architect-img {
-    max-height: 85vh;
-    max-width: 100%;
-    object-fit: contain;
-    z-index: 5; /* Homem na frente do vórtice */
-    filter: drop-shadow(0 0 30px rgba(255, 0, 0, 0.4));
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5; /* Atrás da interface, na frente do vórtice */
     pointer-events: none;
 }
 
-.ui-overlay {
+.architect-main {
+    height: 100%;
+    width: 100%;
+    object-fit: cover; /* Faz a imagem cobrir a tela toda como um fundo real */
+    filter: brightness(0.8) contrast(1.1);
+}
+
+.ui-access {
     position: absolute;
-    bottom: 50px;
-    text-align: center;
     z-index: 20;
+    text-align: center;
+    bottom: 15%;
 }
 
-h1.glitch {
+.portal-title {
     color: #ff0000;
-    font-size: 2rem;
-    letter-spacing: 10px;
-    text-shadow: 0 0 10px #ff0000;
-    margin-bottom: 10px;
-}
-
-p {
-    color: #fff;
-    font-size: 0.7rem;
-    letter-spacing: 2px;
+    font-family: 'Courier New', monospace;
+    font-size: 2.5rem;
+    letter-spacing: 15px;
     margin-bottom: 20px;
+    text-shadow: 0 0 15px #ff0000;
 }
 
-#activate-btn {
+#dna-verify {
     background: transparent;
-    border: 2px solid #ff0000;
+    border: 1px solid #ff0000;
     color: #ff0000;
-    padding: 15px 30px;
-    cursor: pointer;
+    padding: 12px 35px;
+    font-family: 'Courier New', monospace;
     font-weight: bold;
-    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: inset 0 0 10px rgba(255, 0, 0, 0.2);
     transition: 0.3s;
 }
 
-#activate-btn:hover {
+#dna-verify:hover {
     background: #ff0000;
     color: #000;
-    box-shadow: 0 0 40px #ff0000;
+    box-shadow: 0 0 30px #ff0000;
 }
 
-/* Nota de Dinheiro Caindo */
-.money-note {
+/* Nota de Dinheiro Realista */
+.money {
     position: absolute;
-    width: 50px;
-    height: 25px;
-    background: #1b3d1b;
-    border: 1px solid #3e7a3e;
-    z-index: 30; /* Notas na frente de TUDO */
-    pointer-events: none;
-    animation: fall linear forwards;
+    width: 60px;
+    height: 30px;
+    background: url('https://www.transparentpng.com/download/money/JmHk3v-money-dollar-bill-hd-image.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 50; /* Sempre na frente */
+    animation: fallRain linear forwards;
 }
 
-@keyframes fall {
+@keyframes fallRain {
     0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
     10% { opacity: 1; }
-    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
 }
